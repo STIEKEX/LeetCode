@@ -18,9 +18,12 @@ public:
         }
 
         int n = s.size() ; 
+        
 
        if(n % 2 == 1 && count == 1) return true ; 
+
        if(n % 2 == 0 && count == 2) return true ;
+       if(count == 0 ) return true ;
         return false ;
         
         

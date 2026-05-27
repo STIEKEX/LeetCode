@@ -1,31 +1,35 @@
 class Solution {
 public:
     bool validPalindrome(string s) {
-        //  
+       
+       int n = s.size() ; 
 
-        unordered_map<char ,int>m ; 
+       
 
-        for(char ch : s){
-            m[ch]++ ; 
+        int i = 0 , j = n-1 ;
+        if(n % 2 == 0){
+        if(s[i] != s[j]) return false ;
         }
+        int count = 0 ;
 
-        int count =0 ; 
-
-        for(auto val : m){
-            if(val.second % 2 == 1){
-                count++ ; 
+        while(i < j){
+            if(s[i] != s[j]){
+                count = count + 2 ;
             }
+            i++ , j-- ;
         }
+        if(n % 2 == 0 && count > 2) return false ;
+        if(n % 2 == 1 && count > 0) return false ;
+        return true ;
 
-        int n = s.size() ; 
+
+       
+      
+      
+
         
-
-       if(n % 2 == 1 && count == 1) return true ; 
-
-       if(n % 2 == 0 && count == 2) return true ;
-       if(count == 0 ) return true ;
-        return false ;
-        
+       
+       
         
     }
 };

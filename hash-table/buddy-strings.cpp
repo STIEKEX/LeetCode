@@ -12,24 +12,32 @@ public:
         if(same) return true ;
 
         if(s == goal) return false; 
+        // sort(s.begin() , s.end()) ;
+        // sort(goal.begin() , goal.end()); 
+        // return s == goal ;
 
         int n = s.size() ;
 
         int i = 0 , j = 0 ;
-
+        bool happen = false ; 
         while(i < n){
-
+            
             if(s[i] != goal[j]){
                 int k = i+1 ; 
 
                 while(k <n ){
                     if(s[k] == goal[j]){
                         swap(s[k] , s[i]) ; 
-                        break ; 
+                        happen = true ;
+                        break ;
+                       
                     }
                     k++ ;
                 }
             }
+            if(happen) break ;
+                
+            
             i++ , j++ ; 
         }
         return s == goal ; 

@@ -4,12 +4,28 @@ public:
 
         bool same = true  ;
         char a = s[0] ;
+        // for(char ch : s){
+        //     if(ch != a){
+        //         same = false ;
+        //     }
+        // }
+        // if(same) return true ;
+
+        unordered_map<char ,int>m ;
+
         for(char ch : s){
-            if(ch != a){
+            m[ch]++ ; 
+        }
+
+        for(auto val : m){
+            if(val.second % 2 == 1){
                 same = false ;
+                break ;
             }
         }
         if(same) return true ;
+
+
 
         if(s == goal) return false; 
         // sort(s.begin() , s.end()) ;

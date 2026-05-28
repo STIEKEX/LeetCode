@@ -35,31 +35,47 @@ public:
         // sort(goal.begin() , goal.end()); 
         // return s == goal ;
 
-        int n = s.size() ;
+        // int n = s.size() ;
 
-        int i = 0 , j = 0 ;
-        bool happen = false ; 
-        while(i < n){
+        // int i = 0 , j = 0 ;
+        // bool happen = false ; 
+        // while(i < n){
             
-            if(s[i] != goal[j]){
-                int k = i+1 ; 
+        //     if(s[i] != goal[j]){
+        //         int k = i+1 ; 
 
-                while(k <n ){
-                    if(s[k] == goal[j]){
-                        swap(s[k] , s[i]) ; 
-                        happen = true ;
-                        break ;
+        //         while(k <n ){
+        //             if(s[k] == goal[j]){
+        //                 swap(s[k] , s[i]) ; 
+        //                 happen = true ;
+        //                 break ;
                        
-                    }
-                    k++ ;
-                }
-            }
-            if(happen) break ;
+        //             }
+        //             k++ ;
+        //         }
+        //     }
+        //     if(happen) break ;
                 
             
-            i++ , j++ ; 
+        //     i++ , j++ ; 
+        // }
+        // return s == goal ; 
+
+        int n = s.size() ; 
+
+        int i = 0 , j = 0 ;
+        
+        int diff = 0 ; 
+
+        while(i < n){
+            if(s[i] != goal[i]){
+                diff++ ; 
+            }
+            i++ ; 
+
         }
-        return s == goal ; 
+        if(diff > 2) return false ;
+        return true; 
 
 
         

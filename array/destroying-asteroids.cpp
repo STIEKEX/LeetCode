@@ -3,13 +3,13 @@ public:
     bool asteroidsDestroyed(int mass, vector<int>& a) {
         // 3 5 9 19 21 : 
         sort(a.begin() , a.end()) ; 
-
+        long long x = mass ; 
         for(int i = 0 ; i<a.size() ; i++){
-            if(mass < a[i]){
+            if(x < a[i]){
                 return false ;
             }
             else{
-                mass += a[i] ; 
+                x += a[i] ; 
             }
         }
         return true ;

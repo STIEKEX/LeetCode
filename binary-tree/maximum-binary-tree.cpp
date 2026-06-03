@@ -10,39 +10,33 @@
  * };
  */
 class Solution {
-public :
-        TreeNode* dfs(vector<int>& nums , int start , int end){
-            if(start > end){
-                return NULL ;
-            }
-            // TreeNode* root ;
-            int maximum = INT_MIN ;
-            int idx = 0 ;
-              for(int i = start ; i<=end  ; i++){
-            if(maximum < nums[i]){
-                maximum = nums[i] ;
-                idx = i ;
-             }
-            }
-        
-      
+public:
+    TreeNode* solve(vector<int>&nums, int st , int end){
 
-         TreeNode* root  = new TreeNode(maximum) ;
-
-        root->left = dfs(nums , start , idx-1 ) ;
-        root->right = dfs(nums , idx+1 , end) ;
-       
-        
-         return root ;
-
+        if(st > end){
+            return NULL ; 
         }
-    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        return dfs(nums , 0 , nums.size()-1) ;
-        
-        
-       
 
-        
+        int mx = INT_MIN ; 
+        int idx = 0 ; 
+
+        for(int i = st ; i<= end ; i++){
+
+            if(mx < nums[i]){
+                mx = nums[i] ;
+                idx = i ; 
+            }
+        }
+
+        TreeNode* root = new TreeNode(mx) ; 
+
+        root->left = solve(nums,  st , idx-1) ; 
+        root->right = solve(nums , idx+1 , end) ; 
+
+        return root ; 
+    }
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        return solve(nums,  0 , nums.size() -1) ; 
         
     }
 };

@@ -2,49 +2,37 @@ class Solution {
 public:
     int numSplits(string s) {
 
-        set<char>s1 , s2 ; 
+        vector<int>left(26 , 0) ; 
+        vector<int>right(26 , 0) ; 
+        int l = 0 , r = 0 ; 
 
-        int n = s.size() ; 
-        vector<int>prefix(n);
-       vector<int>suffix(n) ; 
-
-            
-        int cnt = 0 ;
-        for(int i = 0 ; i<n ; i++){
-            
-            char ch = s[i] ; 
-            if(s1.find(ch) == s1.end()){
-                cnt++ ; 
-                s1.insert(ch) ; 
+        for(char ch :s){
+            if(right[ch -'a'] == 0){
+                r++ ; 
             }
-            prefix[i] = cnt ; 
-            
+            right[ch -'a']++ ;
         }
-        cnt = 0 ;
-        for(int i = n-1 ; i>=0 ; i--){
-            char ch = s[i] ; 
 
-            if(s2.find(ch) == s2.end()){
-                cnt++ ; 
-                s2.insert(ch) ; 
+        int ans= 0 ; 
+        for(char val : s){
+
+            int ch = val - 'a' ; 
+
+            if(left[ch] == 0){
+                l++ ; 
             }
-            suffix[i] = cnt ; 
-        }
-        int ans = 0 ; 
-        for(int i = 0 ; i<n ; i++){
-            int x = prefix[i] ;
+            left[ch]++ ; 
 
-            if(i+1 < n){
-                int y = suffix[i+1] ; 
-                if(x == y){
-                    ans++ ; 
-                }
+            right[ch]-- ; 
+            if(right[ch] == 0){
+                r-- ; 
+            }
+
+            if(l == r){
+                ans++ ; 
             }
         }
-        return ans ;
-
-        // prefix -> 1 2 3 4 
-        // suffix -> 4  3  2  1
         
+        return ans ;
     }
 };

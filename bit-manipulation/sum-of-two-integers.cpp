@@ -5,8 +5,8 @@ public:
         while(b != 0){
             int c = (a&b)<<1 ; 
 
-            int a = a ^ b  ; 
-            int b = c ;
+             a = a ^ b  ; 
+             b = c ;
         }
         return a  ;
     }

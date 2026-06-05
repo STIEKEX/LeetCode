@@ -22,12 +22,13 @@ public:
             }
 
         }
+       
         
-        if(nonz == 0 && neg == 0 ) return 0 ; 
+        if(nonz == 0  ) return 0 ; 
 
         if(nonz == 1 && zero > 0 && neg == 1) return 0 ;
 
-        if(neg % 2 == 1){
+        if(neg % 2 == 1 && nonz != 1){
             ans = ans / mxng ; 
 
         } 

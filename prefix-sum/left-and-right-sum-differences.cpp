@@ -18,10 +18,8 @@ public:
         vector<int>ans(n) ;
 
         for(int i= 0 ; i<n ; i++){
-            int val = leftsum[i] - rightsum[i]  ;
-            if(val <0){
-                val = -val ;
-            }
+            int val = abs(leftsum[i] - rightsum[i])  ;
+           
             ans[i] = val ;
             
         }

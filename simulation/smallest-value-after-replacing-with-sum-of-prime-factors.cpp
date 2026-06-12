@@ -17,6 +17,7 @@ public:
             sum += n ; 
         }
         if(sum == o) return sum  ; 
+        n = sum ; 
        
        }
        return -1 ; 

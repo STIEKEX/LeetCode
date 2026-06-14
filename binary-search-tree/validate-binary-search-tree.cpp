@@ -10,28 +10,19 @@
  * };
  */
 class Solution {
-    private:
-     vector<int>ans; 
 public:
-        void inorder(TreeNode* root){
-            if(root == NULL){
-                return ;
-            }
-            inorder(root->left) ;
-            ans.push_back(root->val) ;
-            inorder(root->right) ;
-
-        }
-    bool isValidBST(TreeNode* root) { 
-        inorder(root) ;
-
-        for(int i = 0 ; i<ans.size() -1 ; i++){
-            if(ans[i] >= ans[i+1]){
-                return false ;
-            }
-        }
-        return true ;
-       
+    bool solve(TreeNode* root){
+        if(root == NULL) return true ;
+        if(root->left != NULL && root->left->val >= root->val) return false ;
+        if(root->right != NULL && root->right->val =< root->val) return false ;
+        
+        bool l = solve(root->left) ; 
+        bool r= solve(root->right) ; 
+        
+        return l && r ; 
+    }
+    bool isValidBST(TreeNode* root) {
+        return solve(root) ; 
         
     }
 };

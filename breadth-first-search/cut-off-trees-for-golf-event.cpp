@@ -22,23 +22,23 @@ public:
                 return steps ; 
             }
 
-            if(i+1 < m && f[i+1][j] > 1 && !seen[i+1][j]){
+            if(i+1 < m && f[i+1][j] != 0  && !seen[i+1][j]){
                 seen[i+1][j] = true ; 
                 q.push({{i+1 ,j} , steps + 1}) ; 
             }
 
-            if(i-1 >= 0 && f[i-1][j] > 1 && !seen[i-1][j]){
+            if(i-1 >= 0 && f[i-1][j] != 0  && !seen[i-1][j]){
                 seen[i-1][j] = true ; 
                 q.push({{i-1 , j} , steps+1}) ; 
             }
 
 
-            if(j+1 < n && f[i][j+1] > 1 && !seen[i][j+1]){
+            if(j+1 < n && f[i][j+1] != 0  && !seen[i][j+1]){
                 seen[i][j+1] = true ; 
                 q.push({{i , j+1} , steps + 1}) ; 
             }
 
-            if(j-1 >= 0 && f[i][j-1] > 1 && !seen[i][j-1]){
+            if(j-1 >= 0 && f[i][j-1] != 0  && !seen[i][j-1]){
                 seen[i][j-1] = true ; 
                 q.push({{i , j-1} ,steps + 1 }) ; 
             }

@@ -1,31 +1,51 @@
 class Solution {
 public:
     char processStr(string s, long long k) {
-
         int n = s.size() ; 
 
-        string ans = "" ; 
+        long long len = 0 ; 
 
         for(char ch : s){
 
             if(ch >= 'a' && ch <= 'z'){
-                ans += ch ; 
+                len++ ; 
             }
+            if(ch == '#'){
+                len *= 2 ; 
+            }
+            if(ch == '*'){
+                if(len > 0){
+                    len-- ;
+                }
+                
+            }
+        }
+        if(k >= len) return '.' ; 
 
-            if(ch == '*' && ans != ""){
-                ans.pop_back() ; 
+        for(int i = n-1 ; i>=0 ; i--){
+            
+            char ch = s[i] ; 
+
+            if(ch >= 'a' && ch <= 'z'){
+                if(k == len-1){
+                    return ch ; 
+                }
+                len-- ; 
             }
 
             if(ch == '#'){
-                string temp = ans ; 
-                ans += temp ; 
+                len = len/2 ; 
+                k  = k%len ; 
             }
+
             if(ch == '%'){
-                reverse(ans.begin() , ans.end()) ; 
+                k = len - 1 - k ; 
+            }
+            if(ch == '*'){
+                len++ ; 
             }
         }
-        if(ans.size() <= k) return '.' ; 
-        return ans[k] ;
+        return '.' ; 
+        
     }
-
 };

@@ -32,11 +32,11 @@ public:
 
             //left ; 
             for(int i = eRow -1 ; i>=sRow+1 ; i--){
-                if(eRow == sRow){
+                if(eCol == sCol){
                     break ;
                     
                 }
-                ans.push_back(matrix[i][sRow]) ; 
+                ans.push_back(matrix[i][sCol]) ; 
             }
             sRow++ , eRow-- , sCol++ , eCol-- ; 
         }

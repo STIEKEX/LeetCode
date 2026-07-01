@@ -1,63 +1,94 @@
 class Solution {
 public:
-    int ans = INT_MIN ; 
-    
-
-    vector<vector<int>>arr ; 
-
-    int dis(int a , int b){
-        int mn = INT_MAX;
-        for(auto val : arr){
-            int x = val[0] ; 
-            int y = val[1] ; 
-
-            mn = min(mn,  abs(a - x) + abs(b -y)) ; 
-        }
-        return mn; 
-    }
-
-    void solve(int i , int j , int n , vector<vector<bool>>&seen , vector<vector<int>>&grid , int curr){
-        if(i < 0 || j < 0 || i>=n || j>=n || seen[i][j]) return ; 
-
-
-        curr = min(curr ,dis(i , j) ) ; 
-       
-        if(i == n-1 && j == n-1){
-            ans = max(ans , curr) ; 
-            return ;
-        }
-         seen[i][j] = true ; 
-
-        solve(i+1 , j , n , seen , grid , curr) ; 
-        solve(i-1 , j , n , seen , grid, curr) ; 
-        solve(i , j+1 , n , seen , grid , curr) ; 
-        solve(i , j-1 , n , seen , grid , curr) ; 
-
-        seen[i][j] = false ; 
-
-    }
     int maximumSafenessFactor(vector<vector<int>>& grid) {
-        int n = grid.size() ; 
 
-        for(int i = 0; i<n ; i++){
-            for(int j = 0 ; j<n ; j++){
+        int n = grid.size();
 
-                if(grid[i][j] == 1){
-                    arr.push_back({i,j}) ; 
+        queue<pair<int, int>> q;
+        vector<vector<int>> dis(n, vector<int>(n, INT_MAX));
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j]) {
+                    dis[i][j] = 0;
+                    q.push({i, j});
                 }
             }
         }
 
-        
-        vector<vector<bool>>seen(n , vector<bool>(n ,false)) ; 
 
+        // multi source bfs to compute the safest factor
+        int dx[] = {1, -1, 0, 0};
+        int dy[] = {0, 0, 1, -1};
 
-        solve(0 , 0 , n, seen , grid , INT_MAX) ; 
-        return ans; 
+        while (!q.empty()) {
 
-        
+            int x = q.front().first;
+            int y = q.front().second;
+            q.pop();
 
+            for (int i = 0; i < 4; i++) {
 
-        
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+
+                if (nx < 0 || ny < 0 || nx >= n || ny >= n)
+                    continue;
+
+                if (dis[nx][ny] != INT_MAX)
+                    continue;
+
+                dis[nx][ny] = dis[x][y] + 1;
+                q.push({nx, ny});
+            }
+        }
+
+        priority_queue<vector<int>> pq;
+        vector<vector<bool>> vis(n, vector<bool>(n, false));
+        pq.push({dis[0][0], 0, 0});
+
+        while (!pq.empty()) {
+            
+            int safe = cur[0];
+            int x = cur[1];
+            int y = cur[2];
+            q.pop();
+
+            if (vis[x][y])
+                continue;
+
+            vis[x][y] = true;
+
+            if (x == n - 1 && y == n - 1)
+                return safe;
+
+            if (x - 1 >= 0 && !vis[x - 1][y]) {
+
+                int newSafe = min(safe, dis[x - 1][y]);
+
+                pq.push({newSafe, x - 1, y});
+            }
+            if (x + 1 < n && !vis[x + 1][y]) {
+
+                int newSafe = min(safe, dis[x + 1][y]);
+
+                pq.push({newSafe, x + 1, y});
+            }
+
+            if (y - 1 >= 0 && !vis[x][y - 1]) {
+
+                int newSafe = min(safe, dis[x][y - 1]);
+
+                pq.push({newSafe, x, y - 1});
+            }
+
+            if (y + 1 < n && !vis[x][y + 1]) {
+
+                int newSafe = min(safe, dis[x][y + 1]);
+
+                pq.push({newSafe, x, y + 1});
+            }
+        }
+        return -1;
     }
 };

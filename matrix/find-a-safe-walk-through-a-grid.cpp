@@ -1,38 +1,55 @@
 class Solution {
 public:
-    bool dfs(int i , int j , int m , int n , vector<vector<int>>&grid , vector<vector<bool>>&seen , int h ){
-
-        if( i < 0 || j < 0 || i >= m || j>=n || seen[i][j] || h <= 0) return false; 
-
-        if(grid[i][j] ==  1){
-            h-- ; 
-            if(h == 0) return false; 
-        }
-        if(i == m-1 && j == n-1 && h >= 1) return true ;
-
-        seen[i][j] = true ; 
-        
-
-        bool top = dfs(i-1 , j , m , n , grid , seen , h) ; 
-        bool down = dfs(i+1 , j, m , n , grid , seen , h) ; 
-        bool right = dfs(i , j+1 , m , n , grid ,seen , h) ; 
-        bool left = dfs(i , j-1 , m , n , grid ,seen , h) ; 
-
-
-        seen[i][j] = false ;
-
-        return top || down || right || left ; 
-    }
     bool findSafeWalk(vector<vector<int>>& grid, int h) {
         int m = grid.size() ; 
-        int n = grid[0].size() ; 
-
-        vector<vector<bool>>seen(m , vector<bool>(n ,false)) ; 
+        int n = grid[0].size(); 
 
 
-        return dfs(0 , 0 , m , n , grid , seen , h) ; 
+        vector<vector<int>>best(m , vector<int>(n ,  -1)) ; 
+
+        priority_queue< pair<int , pair<int ,int> > > pq ; 
+
+        h = h- grid[0][0] ; 
+
+        if(h <= 0) return false ;
+        pq.push({h , {0 , 0}}) ; 
+        best[0][0] = h ; 
 
 
+        int dx[] = {0 , 0 , 1 , -1} ; 
+        int dy[] = {1 , -1 , 0 , 0} ; 
+        while(!pq.empty()){
 
+            int h = pq.top().first; 
+            int i = pq.top().second.first ; 
+            int j = pq.top().second.second ; 
+            pq.pop() ; 
+
+            
+            if(i == m-1 && j == n-1) return true ;
+
+
+            for(int k = 0 ; k<4 ; k++){
+                int nr = i+ dx[k]  ; 
+                int nc =  j + dy[k] ; 
+
+                if(nr < 0 || nc < 0 || nr >= m || nc >= n )  continue ;
+
+                int nH = h - grid[nr][nc] ;
+                if(nH <= 0)continue ; 
+
+                if(nH > best[nr][nc]){
+                    best[nr][nc] = nH ;
+                    pq.push({nH , {nr , nc}}) ; 
+                }
+
+                
+            }
+
+
+        }
+        return false ; 
+        
+        
     }
 };

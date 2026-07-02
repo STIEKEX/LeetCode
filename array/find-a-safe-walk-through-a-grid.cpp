@@ -2,15 +2,16 @@ class Solution {
 public:
     bool dfs(int i , int j , int m , int n , vector<vector<int>>&grid , vector<vector<bool>>&seen , int h ){
 
-        if( i < 0 || j < 0 || i >= m || j>=n || seen[i][j]) return false; 
+        if( i < 0 || j < 0 || i >= m || j>=n || seen[i][j] || h <= 0) return false; 
 
-
+        if(grid[i][j] ==  1){
+            h-- ; 
+            if(h == 0) return false; 
+        }
         if(i == m-1 && j == n-1 && h >= 1) return true ;
 
         seen[i][j] = true ; 
-        if(grid[i][j] ==  1){
-            h-- ; 
-        }
+        
 
         bool top = dfs(i-1 , j , m , n , grid , seen , h) ; 
         bool down = dfs(i+1 , j, m , n , grid , seen , h) ; 

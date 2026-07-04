@@ -2,7 +2,7 @@ class Solution {
 public:
     bool ship(int days , vector<int>&w , int cap){
         
-        int d = 0 ; 
+        int d = 1 ; 
         int temp = 0 ; 
 
         for(int val : w){
@@ -12,7 +12,7 @@ public:
             }
             temp += val ; 
         }
-        return d <= days ;6
+        return d <= days ;
         
     }
     int shipWithinDays(vector<int>& w, int days) {

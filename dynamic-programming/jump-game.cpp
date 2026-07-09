@@ -1,23 +1,28 @@
 class Solution {
 public:
-    vector<int>dp ; 
-    bool solve(int i , vector<int>&nums){
-        
-        if(i == nums.size()-1) return true ;
-        if(dp[i] != -1) return dp[i] ; 
-        for(int j = 1 ; j<=nums[i] ; j++){
-            if(i+j < nums.size()){
+    bool canJump(vector<int>& nums) {
 
-                if(solve(i+j , nums)){
-                    return dp[i] = true ;
+        int n = nums.size() ; 
+
+        vector<bool>dp(n ,false) ; 
+
+        dp[n-1] = true ;
+
+        for(int i = n-2 ; i>=0 ; i--){
+
+            for(int j = 1 ; j<=nums[i] && j+i <n ; j++){
+
+                if(dp[i+j]){
+                    dp[i] = true ; 
+                    break ; 
                 }
             }
         }
-        return dp[i] = false ;
-    }
-    bool canJump(vector<int>& nums) {
-        dp.resize(nums.size() +1 , -1) ;  
-        return solve(0 , nums) ; 
-        
+        return dp[0] ; 
+
+
+
+
+
     }
 };

@@ -1,33 +1,26 @@
 class Solution {
 public:
     vector<bool> pathExistenceQueries(int n, vector<int>& nums, int maxDiff, vector<vector<int>>& queries) {
-        // sort(queries.begin() , queries.end()) ; 
-        vector<bool>ans; 
+        vector<bool>ans ; 
+        vector<int>prefix(n , 0) ;
+        prefix[0] = 0 ; 
 
-        vector<int>comp(n , true) ; 
-
-        for(int i = 1 ; i<n ; i++){
-            if(abs(nums[i-1] - nums[i]) <= maxDiff){
-                comp[i-1] = true ;
-            }
-            else{
-                comp[i-1] = false ;
+        for(int i =1 ;i <n ; i++){
+            prefix[i] = prefix[i-1] ; 
+            if(abs(nums[i] - nums[i-1]) > maxDiff){
+                prefix[i]++ ; 
             }
         }
-
-        
 
         for(auto val : queries){
-            int u = val[0] ; 
-            int v = val[1] ; 
-            if(comp[u] == comp[v]){
-                ans.push_back(true) ; 
-            }
-            else{
-                ans.push_back(false) ; 
-            }
+           int u = max(val[1] , val[0]) ; 
+           int v = min(val[1] , val[0]) ; 
+
+           ans.push_back((prefix[u] - prefix[v]) == 0) ; 
+
+
+
         }
         return ans ;
-        
     }
 };

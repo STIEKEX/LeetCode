@@ -1,24 +1,25 @@
 class Solution {
 public:
-    bool check(string s){
-        
-        for(int i = 0 ; i<s.size()-1 ; i++){
-            int x = s[i] - '0' ; 
-            int y = s[i+1] - '0' ; 
-            if(x+1 != y) return false; 
-        }
-        return true; 
-    }
     vector<int> sequentialDigits(int low, int high) {
-            vector<int>ans ;
-        for(int i = low ; i<= high ; i++){
-
-            if(check(to_string(i))){
-                ans.push_back(i) ; 
-
+        
+        vector<int>arr = {12, 23, 34, 45, 56, 67, 78, 89, 123, 234, 345, 456, 567, 678, 789, 1234, 2345, 3456, 4567, 5678, 6789, 12345, 23456, 34567, 45678, 56789, 123456, 234567, 345678, 456789, 1234567, 2345678, 3456789, 12345678, 23456789, 123456789} ; 
+        vector<int>ans ;
+        for(int val : arr){
+            if(val >= low && val <= high){
+                ans.push_back(val) ; 
             }
         }
         return ans ;
+        
+
+        
+        
+
+       
+
+
+
+
 
 
         

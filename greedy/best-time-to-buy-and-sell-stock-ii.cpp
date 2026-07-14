@@ -1,23 +1,14 @@
 class Solution {
 public:
-    vector<vector<int>>dp ; 
-    vector<int>p ; 
-    int solve(int i , int b) {
-        if(i == p.size()) return 0 ; 
-
-        if(dp[i][b] != -1) return dp[i][b]  ;
-
-        if(b){
-
-            return dp[i][b] = max((-p[i] + solve(i+1 , 0) ),solve(i+1 , 1) ) ; 
-        }
-        return dp[i][b] = max(p[i] + solve(i+1 , 1) , solve(i+1 , 0)) ; 
-    }
     int maxProfit(vector<int>& prices) {
-        int n = prices.size() ; 
-        p = prices ; 
-        dp.resize(n , vector<int>(2 , -1)) ; 
-        return solve(0 , 1) ; 
         
+        int ans = 0 ;
+
+        for(int i = 1 ; i<prices.size() ; i++){
+            if(prices[i] > prices[i-1]){
+                ans += prices[i] - prices[i-1] ; 
+            }
+        }
+        return ans ;
     }
 };

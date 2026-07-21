@@ -42,7 +42,7 @@ public:
             }
             if(rightZero == 0) break ;
             ans = max(ans , one + leftZero + rightZero) ; 
-            rightZero = leftZero ; 
+            leftZero = rightZero ; 
         }
         return ans ;
     }

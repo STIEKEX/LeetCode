@@ -10,11 +10,11 @@ public:
 
          while(j<n){
             char ch = s[j] ; 
-            while(seen[ch -'a'] && i<n){
+            while(s[i] != ' ' &&seen[ch -'a'] && i<n){
                 seen[s[i] - 'a'] = false ;
                 i++ ; 
             }
-            if(!seen[ch -'a']){
+            if(ch != ' ' && !seen[ch -'a']){
                  
                 seen[ch -'a'] = true ; 
                  

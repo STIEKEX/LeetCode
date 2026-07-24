@@ -1,23 +1,32 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        vector<bool>check(256 , false) ;
         int n = s.size() ; 
-        int l = 0 ; 
-        int r = 0; 
-        int maxlen = 0 ; 
 
-        while(r < n){
-            char c =s[r] ;
-            if(check[c] == false){
-                check[c] = true ;
-                maxlen = max(maxlen ,  r-l+1) ;
-                r++ ;
-            }else{
-                check[s[l]] = false ;
-                l++ ;
+        int mx = INT_MIN ; 
+         int i = 0 , j = 0 ; 
+        int len = 0 ;
+        vector<bool>seen(26 , false) ; 
+
+         while(j<n){
+            char ch = s[j] ; 
+            while(seen[ch -'a'] && i<n){
+                seen[s[i] - 'a'] = false ;
+                i++ ; 
             }
-        }
-        return maxlen ;
+            if(!seen[ch -'a']){
+                 
+                seen[ch -'a'] = true ; 
+                 
+            }
+
+            
+            mx = max(mx , j-i+1) ;
+            j++ ; 
+            
+            
+         }
+         return mx  ;
+        
     }
 };

@@ -26,6 +26,7 @@ public:
             
             
          }
+         if(mx == INT_MIN) return "" ; 
          return mx  ;
         
     }

@@ -10,16 +10,21 @@ public:
         }
         string ans = "" ;
         for(char val : st){
-           ans += val ; 
+           ans += val ;
+           m[val]-- ;  
         }
         string temp = ans ; 
         reverse(temp.begin() , temp.end())  ;
-        int last = ans.size() -1 ; 
-        if(m[ans[last]]% 2 == 1){
-            ans += ans[last] ; 
+        int j = temp.size()-1 ;
+
+        while(j >= 0){
+            int val = m[ans[j]] ; 
+            while(val != 0){
+                ans += ans[j] ; 
+                val-- ;
+            }
+            j-- ;
         }
-        ans += temp ; 
-        return ans ;
 
        
         return ans ;

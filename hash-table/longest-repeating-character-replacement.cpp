@@ -1,36 +1,30 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        
-        int st = 0 ; 
-        int end = 0 ;
+        int n = s.size() ; 
 
-        int len = 0 ; 
-        int maxlen = 0 ;
+        int i = 0 , j = 0 ; 
 
-        int mxfreq = 0 ; 
-        
-        vector<int>freq(26 , 0) ;
+        int mx = INT_MIN ; 
+        int mxF = 0 ; 
 
-        while(end < s.size()){
+        vector<int>f(256 ,0) ; 
 
-            freq[s[end] -'A']++ ;
+        while(j < n){
+            char ch = s[j] ; 
 
-            mxfreq = max(mxfreq , freq[s[end] - 'A']) ;
+            f[ch- 'A']++ ; 
 
-            len = end -st + 1 ;
-
-            while(len - mxfreq > k){
-                
-                freq[s[st] - 'A']-- ;
-                st++ ; 
-                len-- ;
+            mxF = max(mxF , f[ch-'A']);
+            int len = j -i+1 ; 
+            while(len - mxF > k){
+                f[s[i]-'A']-- ; 
+                i++ ; 
+                len-- ; 
             }
-
-            maxlen = max(maxlen , len) ;
-            end++ ;
+            mx = max(mx , len) ; 
+            j++  ;
         }
-        return maxlen ;
-        
+        return mx ; 
     }
 };

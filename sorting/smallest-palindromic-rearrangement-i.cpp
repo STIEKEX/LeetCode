@@ -1,35 +1,31 @@
 class Solution {
 public:
     string smallestPalindrome(string s) {
-        if(s.size() == 1) return s ; 
-        unordered_map<char ,int>m ; 
-        set<char>st ; 
-        for(char ch : s){
-            m[ch]++ ; 
-            st.insert(ch) ; 
-        }
-        string ans = "" ;
-        for(char val : st){
-           ans += val ;
-           m[val]-- ;  
-        }
-        string temp = ans ; 
-        reverse(temp.begin() , temp.end())  ;
-        int j = temp.size()-1 ;
 
-        while(j >= 0){
-            int val = m[ans[j]] ; 
-            while(val != 0){
-                ans += ans[j] ; 
-                val-- ;
-            }
-            j-- ;
+        int n = s.size() ; 
+
+        int freq[26] = {0} ; 
+
+        for(int i = 0 ; i<n/2 ; i++){
+            freq[s[i] - 'a']++ ; 
         }
 
-       
-        return ans ;
+        int idx = 0 ;
+        for(int i = 0;  i<26 ; i++){
+            while(freq[i] > 0){
+                
+                char ch = 'a' + i ; 
+                s[idx] = ch ; 
 
+                s[n-1-idx] = ch ;
+                idx++ ; 
+                freq[i]-- ; 
+            }   
+          
+        }
+        return s ; 
 
-
+        
+        
     }
 };

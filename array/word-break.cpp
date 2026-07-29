@@ -1,20 +1,29 @@
 class Solution {
 public:
-    bool solve(int i , string s , vector<string>&d){
+    set<string>st ; 
+    vector<int>dp  ;
+    bool solve(int i , string s ){
         if(i == s.size()) return true ;
 
+        if(dp[i] != -1) return dp[i] ; 
         string temp = "" ; 
         for(int j = i ; j<s.size() ; j++){
             temp += s[j] ; 
 
-            if(find(d.begin() , d.end() , temp) != d.end() && solve(j+1 , s , d)){
-                return true ;
+            if(st.find(temp) != st.end() && solve(j+1 , s )){
+                return dp[j] = true ;
             }
         }
-        return false ;
+        return dp[i] = false ;
     }
     bool wordBreak(string s, vector<string>& d) {
-        return solve(0 , s  ,d) ; 
+       
+        for(string val : d){
+            st.insert(val) ; 
+        }
+        int n = s.size() ; 
+        dp.resize(n+1 , -1) ; 
+         return solve(0 , s ) ; 
         
        
         

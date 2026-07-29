@@ -1,8 +1,8 @@
 class Solution {
 public:
-    set<string>st ; 
+    unordered_set<string>st ; 
     vector<int>dp  ;
-    bool solve(int i , string s ){
+    bool solve(int i , string& s ){
         if(i == s.size()) return true ;
 
         if(dp[i] != -1) return dp[i] ; 
@@ -11,7 +11,7 @@ public:
             temp += s[j] ; 
 
             if(st.find(temp) != st.end() && solve(j+1 , s )){
-                return dp[j] = true ;
+                return dp[i] = true ;
             }
         }
         return dp[i] = false ;

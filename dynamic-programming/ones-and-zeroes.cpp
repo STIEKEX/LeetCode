@@ -23,7 +23,7 @@ public:
         int one = countOne(strs[i]) ; 
         int zero = countZero(strs[i]) ; 
         if(one <= n && zero <= m){
-            taken = max(1 + solve(i+1 , strs , m-zero , n-one) , solve(i+1 , strs , one , zero)) ; 
+            taken = max(1 + solve(i+1 , strs , m-zero , n-one) , solve(i+1 , strs , m , n)) ; 
         }
         int notTaken = solve(i+1 , strs , m , n) ; 
         return dp[i][m][n] = max(taken , notTaken) ; 

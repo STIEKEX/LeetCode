@@ -14,7 +14,7 @@ public:
 
             int u = val[0] ; 
             int v = val[1] ; 
-            if(v > temp){
+            if(u > temp){
                 cnt++ ;  
                 temp = v ; 
             }

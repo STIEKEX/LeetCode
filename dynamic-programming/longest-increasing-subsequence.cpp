@@ -1,23 +1,35 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        int n = nums.size() ; 
 
-        vector<int>temp ; 
-
+        vector<int>arr ; 
 
         for(int val : nums){
 
-            auto it = lower_bound(temp.begin() , temp.end() , val) ; 
-
-            if(it == temp.end()){
-                temp.push_back(val)  ;
+            if(arr.empty() || val > arr.back()){
+                arr.push_back(val) ; 
             }
             else{
-                *it = val ; 
+                int st = 0 ;
+                int end = arr.size()-1 ; 
+                int ans = arr.size()-1 ; 
+
+                while(st <= end){
+
+                    int mid = st + (end -st)/2 ; 
+
+                    if(arr[mid] >= val){
+                        ans = mid ; 
+                        end = mid-1 ; 
+                    }
+                    else{
+                        end = mid-1 ;
+                    }
+                }
+                arr[ans] = val ;
             }
         }
-        return temp.size() ; 
+        return arr.size() ; 
         
     }
 };

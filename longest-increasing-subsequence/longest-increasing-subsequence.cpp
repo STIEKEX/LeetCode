@@ -23,7 +23,7 @@ public:
                         end = mid-1 ; 
                     }
                     else{
-                        end = mid-1 ;
+                      st = mid+1; 
                     }
                 }
                 arr[ans] = val ;

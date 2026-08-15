@@ -35,7 +35,7 @@ public:
 
                     if(w + wt < dis[v]){
                         dis[v] = w + wt ; 
-                        q.push({{v , w} , stop + 1}) ;
+                        q.push({{v , w+wt} , stop + 1}) ;
                     }
                 }
            }

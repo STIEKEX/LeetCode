@@ -7,7 +7,7 @@ public:
 
 
        priority_queue< pair<int ,pair<int ,int>> , vector<pair< int , pair<int ,int>>> , greater<pair< int , pair<int ,int>>>>q ; 
-       q.push({0 , {0 , 0}}) ; 
+       q.push({grid[0][0] , {0 , 0}}) ; 
 
        vector<vector<bool>>seen(n , vector<bool>(n ,false)) ; 
 

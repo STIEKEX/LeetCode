@@ -39,6 +39,7 @@ public:
                     }
                 }
            }
+           if(dis[dst] == INT_MAX) return -1 ; 
            return dis[dst] ; 
 
         

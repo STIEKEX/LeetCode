@@ -1,48 +1,46 @@
 class Solution {
 public:
-    vector<int> findOrder(int n, vector<vector<int>>& edges) {
+    vector<int> findOrder(int n, vector<vector<int>>& pre) {
 
         vector<vector<int>>adj(n) ; 
 
-        for(auto val : edges){
-            int u = val[0] ; 
-            int v = val[1] ; 
-
+        for(auto val : pre){
+            int u  = val[0] ; 
+            int v = val[1] ;
             adj[v].push_back(u) ; 
         }
-        
 
-        vector<int>in(n ,0) ;
-        
-       for(auto val : edges){
-        int u = val[0] ; 
-        int v = val[1] ; 
-        in[u]++ ;
-       }
+        vector<int>in(n) ; 
 
-       queue<int>q;  
+        for(int i = 0 ; i<n ; i++){
+            for(int val : adj[i]){
+                in[val]++ ; 
+            }
+        }
+
+        queue<int>q  ;
+
        for(int i = 0 ; i<n ; i++){
         if(in[i] == 0){
             q.push(i) ; 
         }
        }
-       vector<int>ans ; 
-       while(q.size() > 0){
-        int curr = q.front() ; 
-        q.pop() ; 
-        ans.push_back(curr) ; 
+        vector<int>ans ;
+       while(q.size()){
+            int u = q.front() ; 
+            q.pop()  ;
 
-        for(int val : adj[curr]){
-            in[val]-- ; 
-            if(in[val] == 0){
-                q.push(val) ; 
+            ans.push_back(u) ; 
+
+            for(int  val : adj[u]){
+                in[val]-- ; 
+                if(in[val] == 0){
+                    q.push(val) ; 
+                }
             }
-        }
-
-        
-
        }
-       if(ans.size() != n) return {} ;
+       if(ans.size() != n) return {} ; 
        return ans ;
+        
     }
 };

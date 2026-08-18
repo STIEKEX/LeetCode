@@ -4,12 +4,20 @@ public:
         int n = nums.size() ; 
         unordered_map<int ,int>m  ;
 
-        int mx = INT_MIN ; 
+        int mx = -1; 
+        int largest = INT_MIN ; 
         for(int val : nums){
             m[val]++ ; 
-            mx = max(mx , val) ; 
+            largest = max(largest , val) ; 
+           
         }
-        if(n == k)return mx ; 
+        for(auto val : m){
+            if(val.first > mx && val.second == 1){
+                mx = max(mx , val.first) ; 
+            }
+        }
+        if(n == k )return largest; 
+        if(k == 1) return mx ; 
         int x = nums[0] ; 
 
         int y = nums[n-1] ;

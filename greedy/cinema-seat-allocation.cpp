@@ -9,15 +9,18 @@ public:
         
         unordered_set<pair<int ,int> , pair_hash>m ; 
 
+        unordered_set<int>row ;
         for(auto val : r){
             m.insert({val[0] , val[1]}) ; 
+            row.insert(val[0]) ; 
         }
         
        
-        int cnt = 0 ; 
+        int cnt = 2 * n ; 
         
-        int k = 1 ;
-        while(k <= n){
+        
+
+        for(int k : row){
             
             vector<int>l = {2 , 3 ,4 , 5} ; 
             vector<int>M = {4 ,5 ,6 ,7} ; 
@@ -52,12 +55,14 @@ public:
                 }
             }
             if(left && right){
-                cnt += 2 ; 
+                
             }
-            else if(left || middle || right){
-                cnt += 1 ; 
+            else if(left || right || middle){
+                cnt -= 1 ; 
             }
-            k++ ; 
+            else{
+                cnt -=2 ;
+            }
         }
         return cnt ; 
     }

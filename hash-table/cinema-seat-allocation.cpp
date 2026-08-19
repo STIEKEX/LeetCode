@@ -12,28 +12,50 @@ public:
         for(auto val : r){
             m.insert({val[0] , val[1]}) ; 
         }
-        vector<vector<int>>arr = {{2 , 3 , 4 , 5} , {4 , 5 ,6 ,7} , {6 , 7 ,8 ,9}} ; 
+        
        
         int cnt = 0 ; 
         
         int k = 1 ;
         while(k <= n){
-             vector<vector<bool>>seen(n+1 , vector<bool>(10 , false)) ; 
-            for(int i = 0 ; i<3 ; i++){
-                bool is = false ;
-                for(int j = 0 ; j<4  ; j++){
-                    int val = arr[i][j] ; 
+            
+            vector<int>l = {2 , 3 ,4 , 5} ; 
+            vector<int>M = {4 ,5 ,6 ,7} ; 
+            vector<int>r = {6 , 7 ,8,9} ; 
 
-                    auto x = make_pair(k , val); 
-                    if(m.find(x)!= m.end() || seen[k][val]){
-                        is = true ;
-                        break ; 
-                    }
-                    seen[k][val] = true ;
+            bool left = true , right = true , middle = true ; 
+
+            for(int val : l){
+                auto x = make_pair(k ,val) ; 
+                if(m.find(x) != m.end()){
+                    left = false ;
+                    break ; 
+                    
                 }
-                if(!is){
-                    cnt++ ; 
+            }
+
+             for(int val : M){
+                auto x = make_pair(k ,val) ; 
+                if(m.find(x) != m.end()){
+                    middle = false ;
+                    break ; 
+                    
                 }
+            }
+
+             for(int val : r){
+                auto x = make_pair(k ,val) ; 
+                if(m.find(x) != m.end()){
+                    right = false ;
+                    break ; 
+                    
+                }
+            }
+            if(left && right){
+                cnt += 2 ; 
+            }
+            else if(left || middle || right){
+                cnt += 1 ; 
             }
             k++ ; 
         }

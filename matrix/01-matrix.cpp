@@ -1,65 +1,42 @@
 class Solution {
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-
         int m = mat.size() ; 
         int n = mat[0].size() ; 
 
 
-        queue<pair<pair<int ,int> ,int>>q ; 
-        vector<vector<int>>ans(m , vector<int>(n ,  -1)) ; 
-
-        for(int i = 0  ; i <m ; i++){
+        queue<pair<int ,int>>q ; 
+        vector<vector<int>>dis( m ,vector<int>(n , -1)) ; 
+        for(int i = 0 ; i<m ; i++){
             for(int j = 0 ; j<n ; j++){
+
                 if(mat[i][j] == 0){
-                    q.push({{i,j} , 0}) ; 
-                    ans[i][j] = 0 ;
+                    q.push({i,j}) ; 
+                    dis[i][j] = 0 ; 
+
                 }
             }
         }
 
-        while(q.size()  > 0){
-            int i = q.front().first.first ; 
-            int j = q.front().first.second ; 
+        int dir[4] = {1 , -1 , 0 , 0} ; 
+        int dic[4] = {0 , 0 , -1 , 1} ; 
 
-            int dis = q.front().second ; 
-            q.pop() ;
+        while(!q.empty()){
+            auto[r , c] = q.front(); 
+            q.pop() ; 
 
-            if(i+1 < m && ans[i+1][j] == -1){
-                ans[i+1][j] = dis+1 ; 
+            for(int i = 0 ; i<4 ; i++){
+                int ni = r + dir[i] ; 
+                int nj = c + dic[i] ; 
 
-                q.push({{i+1 , j} , dis+1}) ; 
-
-            }   
-
-
-            if(i-1 >= 0  && ans[i-1][j] == -1){
-                ans[i-1][j] = dis+1 ; 
-
-                q.push({{i-1 , j} , dis+1}) ; 
-
-            }   
-
-
-
-            if(j+1 < n && ans[i][j+1] == -1){
-                ans[i][j+1] = dis+1 ; 
-
-                q.push({{i , j+1} , dis+1}) ; 
-
-            }   
-
-
-            if(j-1 >= 0  && ans[i][j-1] == -1){
-                ans[i][j-1] = dis+1 ; 
-
-                q.push({{i , j-1} , dis+1}) ; 
-
-            }   
-
+                if(ni >= 0 && nj >= 0 && ni <m && nj < n && dis[ni][nj] == -1){
+                    q.push({ni , nj}) ; 
+                    dis[ni][nj] = dis[r][c] + 1 ; 
+                }
+            }
 
         }
-        return ans ;
+        return dis ;
         
     }
 };

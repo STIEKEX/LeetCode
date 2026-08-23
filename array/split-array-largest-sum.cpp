@@ -1,46 +1,46 @@
-#include <numeric>
 class Solution {
 public:
     bool valid(int mid , vector<int>&nums , int k){
+        int cnt = 1 ; 
+        int sum = 0   ;
 
-        int sum = 0 , cnt = 1 ;
-        for(int i = 0 ; i<nums.size() ; i++){
-            if(sum + nums[i] <= mid){
-                sum += nums[i] ; 
+        for(int val : nums){
+            if(val + sum <= mid){
+                sum += val ; 
             }
             else{
-                sum = nums[i] ; 
+                sum = val ; 
                 cnt++ ; 
             }
         }
-        if(cnt > k) return false ;
-         return true ;
+        if(cnt > k) return false;  
+
+        return true ;
     }
     int splitArray(vector<int>& nums, int k) {
 
-        int n = nums.size() ; 
+        int st = 0 ; 
+        int end = 0 ; 
+    
+        for(int val : nums){
+            st = max(st , val) ; 
+            end += val ; 
+        }
+        
+        int ans = 0 ; 
 
-        int st = 0  ;
-
-       int end = 0 ;
-       for(int val : nums){
-        end += val ; 
-        st = max(st , val) ; 
-       }
-        int ans = 0 ;
         while(st <= end){
-            int mid  = st +(end- st)/2 ; 
-            
-           
-            if(valid(mid , nums , k)){
+
+            int mid = st + (end-st)/2 ; 
+
+            if(valid(mid , nums  , k)){
                 ans = mid ; 
-                end = mid-1;
+                end = mid-1 ;
             }
             else{
-                st = mid+1; 
+                st = mid+1 ; 
             }
         }
         return ans ;
-        
     }
 };

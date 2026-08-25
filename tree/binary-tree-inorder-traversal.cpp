@@ -11,18 +11,20 @@
  */
 class Solution {
 public:
-        void iot(TreeNode* root , vector<int>&ans){
-            if(root == NULL){
-                return ;
-            }
-            iot(root->left , ans) ;
-            ans.push_back(root->val) ;
-            iot(root->right , ans) ;
-        }
+    vector<int>ans ; 
+    void solve(TreeNode* root){
+        if(root == NULL) return ; 
+
+        solve(root->left) ; 
+        ans.push_back(root->val)  ;
+        solve(root->right) ; 
+
+    }
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int>ans ; 
-        iot(root , ans) ;
-        return ans ;
+        solve(root) ; 
+        return ans ; 
+
+
         
     }
 };

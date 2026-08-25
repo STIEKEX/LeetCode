@@ -29,7 +29,7 @@ public:
 
             for(int j = 0 ; j<n ; j++){
 
-                if(stones[i][0] == stones[j][0] || stones[i][1] == stones[j][0]){
+                if(stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]){
                     adj[i].push_back(j) ; 
                     adj[j].push_back(i) ; 
                 }

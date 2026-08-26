@@ -11,25 +11,19 @@
  */
 class Solution {
 public:
-        bool mirror(TreeNode* left , TreeNode* right){
-            if(left == NULL && right == NULL){
-                return true ;
-            }
-            if(left == NULL && right != NULL){
-                return false; 
-            }
-            if(left != NULL && right == NULL){
-                return false ;
-            }
-            if(left->val != right->val){
-                return false ;
-            }
-            return mirror(left->left , right->right) && mirror(left->right , right->left) ;
-        }
+    bool solve(TreeNode* root1 , TreeNode* root2){  
+
+        if(root1 == NULL && root2 == NULL) return true ;
+        if(root1 != NULL && root2 == NULL) return false ;
+        if(root1 == NULL && root2 != NULL) return false ;
+        if(root1->val  != root2->val) return false ;
+
+       return solve(root1->left , root2->right) || 
+        solve(root1->right , root2->left) ;
+    }
     bool isSymmetric(TreeNode* root) {
-        if(root == NULL){
-            return true; 
-        }
-        return mirror(root->left , root->right) ;
+       return  solve(root->left , root->right) ; 
+
+        
     }
 };

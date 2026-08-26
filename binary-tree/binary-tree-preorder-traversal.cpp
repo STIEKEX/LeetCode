@@ -11,20 +11,18 @@
  */
 class Solution {
 public:
-        void pot(TreeNode* root,vector<int>&ans){
-            if(root == NULL){
-                return ;
-            }
-            ans.push_back(root->val) ;
-            pot(root->left , ans) ;
-            pot(root->right , ans) ;
-        }
+    vector<int>ans ; 
 
+    void solve(TreeNode* root){
+        if(root == NULL)return ;
+
+        ans.push_back(root->val) ; 
+        solve(root->left) ; 
+        solve(root->right) ; 
+    }
     vector<int> preorderTraversal(TreeNode* root) {
-        vector<int>ans ;
-        pot(root , ans) ;
+        solve(root) ; 
         return ans ;
-
         
     }
 };

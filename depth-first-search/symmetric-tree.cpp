@@ -18,7 +18,7 @@ public:
         if(root1 == NULL && root2 != NULL) return false ;
         if(root1->val  != root2->val) return false ;
 
-       return solve(root1->left , root2->right) || 
+       return solve(root1->left , root2->right) &&
         solve(root1->right , root2->left) ;
     }
     bool isSymmetric(TreeNode* root) {

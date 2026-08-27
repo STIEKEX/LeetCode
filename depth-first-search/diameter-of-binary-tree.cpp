@@ -10,28 +10,19 @@
  * };
  */
 class Solution {
-    private:
-    int maximum =INT_MIN ;
 public:
-    int  dfs(TreeNode* root){
-        if(root == NULL){
-            return 0 ;
-        }
-       int l = dfs(root->left);
-       int r = dfs(root->right) ;
+    int ans = 0 ; 
+    int solve(TreeNode* root){
+        if(root == NULL) return 0 ; 
 
-        int val = l+r ; 
-        if(val > maximum){
-            maximum = val ;
-        }
-       
-
-       return max(l,r)+1 ;
+        int l = solve(root->left) ; 
+        int r = solve(root->right) ; 
+        ans = max(ans , l+r) ; 
+        return max(l,r) + 1 ; 
     }
-
     int diameterOfBinaryTree(TreeNode* root) {
-        dfs(root) ;
-        return maximum ;
+        solve(root) ; 
+        return ans ;
         
     }
 };

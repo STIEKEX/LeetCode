@@ -11,30 +11,33 @@
  */
 class Solution {
 public:
-        bool issame(TreeNode* root, TreeNode* subRoot){
-            if(root == NULL && subRoot == NULL){
+    bool check(TreeNode* p , TreeNode* q ){
+
+        if(p == NULL && q == NULL) return true ; 
+
+        if(p != NULL && q == NULL) return false ;
+
+        if(p == NULL && q != NULL) return false ;
+
+        if(p->val != q->val) return false ;
+
+        return check(p->left , q->left) && check(p->right , q->right) ; 
+    }
+
+    bool search(TreeNode* root , TreeNode*subRoot){
+        if(root == NULL) return false ;
+
+        if(root->val == subRoot->val){
+            if(check(root , subRoot)){
                 return true ;
             }
-            if(root == NULL && subRoot != NULL){
-                return false ;
-            }
-            if(root != NULL && subRoot == NULL){
-                return false  ;
-            }
-
-            bool left = issame(root->left , subRoot->left) ;
-            bool right = issame(root->right , subRoot->right) ;
-            return left && right && root->val == subRoot->val ;
         }
+      return   search(root->left , subRoot) ||  
+        search(root->right , subRoot)  ;
+
+    }
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        if(root == NULL){
-            return false ;
-        }
-        if(root->val == subRoot->val){
-            if((issame(root , subRoot))) return true  ;
-        }
-        return isSubtree(root->left ,subRoot) || isSubtree(root->right , subRoot)  ;
-
+        return search(root , subRoot) ; 
         
     }
 };

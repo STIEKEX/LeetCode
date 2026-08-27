@@ -10,26 +10,23 @@
  * };
  */
 class Solution {
-    private:
-    bool balance = true ;
 public:
-        int  height(TreeNode* root){
-            if(root == NULL){
-                return 0 ;
-            }
+    bool ans = true ;
+    int solve(TreeNode* root){
+        if(root == NULL) return 0;
 
-            int l = height(root->left) ;
-            int r = height(root->right) ;
+        int l = solve(root->left) ; 
+        int r = solve(root->right) ; 
 
-            if(abs(l-r) > 1){
-                balance = false ;
-            }
-
-            return max(l , r)+1 ;
+        if(abs(l-r) > 1) {
+            ans = false ;
         }
-    bool isBalanced(TreeNode* root) {
+        return max(l,r)+1 ; 
 
-        height(root) ;
-       return balance ;
+    }
+    bool isBalanced(TreeNode* root) {
+        solve(root) ; 
+        return ans ;
+        
     }
 };

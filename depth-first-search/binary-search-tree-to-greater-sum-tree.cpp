@@ -10,27 +10,19 @@
  * };
  */
 class Solution {
-    private:
-    int sum = 0 ;
 public:
-        void revInorder(TreeNode* root){
-            if(root == NULL){
-                return ;
-            }
-            revInorder(root->right) ;
-            
-            sum += root->val ;
-            root->val = sum ;
-            revInorder(root->left) ;
+        int sum = 0 ; 
+        void solve(TreeNode* root){
+            if(root == NULL) return  ; 
 
-
+            solve(root->right) ; 
+            sum += root->val  ;
+            root->val = sum ; 
+            solve(root->left) ; 
         }
-        
     TreeNode* bstToGst(TreeNode* root) {
-        revInorder(root) ;
-        return root ;
-        
-
+        solve(root)  ;
+        return root ; 
         
     }
 };

@@ -10,51 +10,36 @@
  * };
  */
 class Solution {
-    private:
-    int sum = 0 ;
-    int count = 0 ;
-    int maximumSum = INT_MIN ;
-    int level = 0 ;
 public:
-    void bfs(TreeNode* root ){
-        if(root == NULL){
-            return  ;
-        }
-        queue<TreeNode*>q ;
-        q.push(root) ;
-        q.push(NULL);
-
-        while(q.size() > 0){
-            TreeNode* curr = q.front() ;
-            q.pop() ;
-            if(curr == NULL){
-                count++ ;
-                if(sum > maximumSum){
-                    maximumSum = sum ;
-                    level = count ;
-                }
-                sum = 0 ;
-                if(!q.empty()){
-                    q.push(NULL) ;
-                }
-            }
-            else{
-                sum += curr->val ;
-                if(curr->left){
-                    q.push(curr->left) ;
-                }
-                if(curr->right){
-                    q.push(curr->right) ;
-                }
-            }
-        }
-        return ;
-    }
     int maxLevelSum(TreeNode* root) {
-        
-        bfs(root) ;
 
-        return level  ; 
-        
+        int cnt = 1 ; 
+        int mx = 0 ; 
+
+
+        queue<TreeNode*>q ; 
+        q.push(root) ; 
+        int ans = 0 ;
+        while(q.size()) {
+            int size = q.size() ; 
+
+            int sum = 0 ;
+
+            for(int i = 0 ; i<size; i++){
+                TreeNode* node = q.front() ; 
+                q.pop()  ;
+
+                sum += node->val ; 
+                if(node->left) q.push(node->left) ; 
+                if(node->right) q.push(node->right) ; 
+
+            }
+            if(sum > mx){
+                mx = sum ; 
+                ans = cnt ; 
+            }
+            cnt++ ; 
+        }
+        return ans ;
     }
 };

@@ -9,32 +9,30 @@
  */
 class Solution {
 public:
-        TreeNode* dfs(TreeNode* root , TreeNode* p , TreeNode* q){
-            if(root == NULL){
-                return NULL ;
-            }
-            if(root == p || root == q){
-                return root ;
-            }
-            TreeNode* left = dfs(root->left , p , q) ;
-            TreeNode* right = dfs(root->right , p , q) ; 
+    TreeNode* solve(TreeNode* root , TreeNode* p , TreeNode* q){
 
-            if(left == NULL && right == NULL){
-                return NULL ;
-            }
-            else if (left == NULL && right  != NULL){
-                return right ;
-            }
-            else if (left != NULL && right == NULL){
-                return left ;
-            }
-            else{
-                return root ;
-            }
+        if(root == NULL) return NULL ; 
 
+        if(root == p || root == q) {
+            return root ; 
         }
+
+       TreeNode* l =  solve(root->left , p , q) ; 
+        TreeNode* r = solve(root->right , p , q) ; 
+
+
+        if(l == NULL && r == NULL) return NULL ;
+
+        else if(l != NULL && r == NULL) return l ; 
+
+        else if(l == NULL && r != NULL) return r ; 
+
+        return root ; 
+
+
+    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-      return   dfs(root , p , q) ;
+        return solve(root , p ,q) ;     
         
     }
 };

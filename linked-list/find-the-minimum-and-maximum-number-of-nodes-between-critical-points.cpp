@@ -34,20 +34,16 @@ public:
             }
         }
 
-        sort(point.begin() , point.end()) ;
+       
 
         if(point.size() <= 1) return ans ;
 
-        if(point.size() == 2){
-            ans[0] = abs(point[0] - point[1]) ; 
-            ans[1] = ans[0] ; 
-            return ans ; 
+        ans[1] = point.back() - point[0] ; 
+        
+        ans[0] = INT_MAX ;
+        for(int i = 1 ; i<point.size() ; i++){
+            ans[0] = min(ans[0] , (point[i] - point[i-1])) ; 
         }
-
-
-        ans[0] = point[point.size()-1] - point[point.size() - 2] ; 
-        ans[1] = point[point.size()-1] - point[0] ;
-         return ans ;
-
+        return ans ;
     }
 };

@@ -10,34 +10,26 @@
  * };
  */
 class Solution {
-    private:
-    unordered_map<int ,int>m ; 
-    int idx = 0 ; 
 public:
+    unordered_map<int ,int>m ; 
 
-        TreeNode* helper(vector<int>& preorder , vector<int>& inorder , int st , int end){
-            if(st > end){
-                return NULL ;
-            }
-            TreeNode* root = new TreeNode(preorder[idx++ ]) ; 
-            int mid = m[root->val] ; 
-            root->left = helper(preorder , inorder ,st , mid-1 ) ; 
-            root->right = helper(preorder , inorder , mid+1 , end) ;
+    int idx = 0 ;
 
-            return root ;
-
-
-        }
+    TreeNode* solve(vector<int>&preorder , vector<int>&inorder , int st , int end){
+        if(st > end) return NULL ; 
+        TreeNode* root = new TreeNode(preorder[idx++]) ; 
+        int mid = m[root->val] ; 
+        root->left = solve(preorder , inorder , st , mid-1)  ;
+        root->right = solve(preorder , inorder , mid+1 , end) ; 
+        return root ;
+    }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        
+        int n = preorder.size() ; 
 
-        for(int i = 0 ; i<inorder.size() ; i++){
+        for(int i = 0 ; i<n ; i++){
             m[inorder[i]] = i ; 
         }
-
-        return helper(preorder , inorder , 0 , preorder.size()-1) ;
-
-
+        return solve(preorder , inorder , 0 , n-1) ; 
         
     }
 };

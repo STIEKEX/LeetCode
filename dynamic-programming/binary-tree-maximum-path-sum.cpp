@@ -16,10 +16,10 @@ public:
     int solve(TreeNode* root){
 
         if(root == NULL) return 0  ;
-        int l = solve(root->left) ; 
-        int r = solve(root->right) ; 
+        int l = max(0 , solve(root->left)) ; 
+        int r = max(0 , solve(root->right)) ; 
         sum  = max(sum , l +r + root->val)  ;
-        return l + r + root->val ; 
+       return max(l,r) + root->val ; 
     }
     int maxPathSum(TreeNode* root) {
         solve(root) ;

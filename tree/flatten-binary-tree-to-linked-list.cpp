@@ -11,22 +11,17 @@
  */
 class Solution {
 public:
-        TreeNode* last = NULL ;
+    TreeNode* last = NULL  ;
     void flatten(TreeNode* root) {
 
-        if(root == NULL ) return  ;
+        if(root == NULL) return  ; 
+
         flatten(root->right) ; 
         flatten(root->left) ; 
 
-        root->left = NULL ;
+        root->left = NULL ; 
         root->right = last ; 
-        last = root ;
-
-
-
-
-
-        
+        last = root ; 
         
     }
 };

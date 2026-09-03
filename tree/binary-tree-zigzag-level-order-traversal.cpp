@@ -10,52 +10,43 @@
  * };
  */
 class Solution {
-    private:
-    int count = 0 ;
 public:
-        void dfs(TreeNode* root , vector<int>&arr , vector<vector<int>>&ans){
-            if(root == NULL){
-                return ;
-            }
-            queue<TreeNode*>q ;
-            q.push(root) ;
-            q.push(NULL) ;
+    vector<vector<int>>ans ; 
 
-            while(q.size() > 0){
-                TreeNode* curr = q.front() ;
-                q.pop() ;
+    void bfs(TreeNode* root){
+        if(root == NULL) return ; 
 
-                if(curr == NULL){
-                    count++ ;
-                    if(count % 2 == 0){
-                        reverse(arr.begin() , arr.end()) ;
-                        ans.push_back(arr) ;     
-                    }
-                    else{
-                        ans.push_back(arr) ;
-                    }
-                    arr.clear() ;
-                    if(!q.empty()){
-                        q.push(NULL) ;
-                    }
-                }
-                else{
-                    arr.push_back(curr->val) ;
-                    if(curr->left){
-                        q.push(curr->left) ;
-                    }
-                    if(curr->right){
-                        q.push(curr->right) ;
-                    }
-                }
+        queue<TreeNode*>q ; 
+        q.push(root) ; 
+
+        int level = 1 ; 
+        while(!q.empty()){
+            int l = q.size()  ;
+
+            vector<int>arr ; 
+
+            for(int i = 0 ; i<l ; i++){
+                TreeNode* curr = q.front() ; 
+                q.pop()  ;
+
+                arr.push_back(curr->val)  ;
+                if(curr->left) q.push(curr->left) ; 
+                if(curr->right) q.push(curr->right) ; 
             }
-            return ;
+            if(level % 2 == 1){
+                ans.push_back(arr) ; 
+            }
+            else{
+                reverse(arr.begin() , arr.end()) ; 
+                ans.push_back(arr) ; 
+            }
+            level++  ;
         }
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<int>arr ;
-        vector<vector<int>>ans ;
 
-        dfs(root , arr ,ans) ;
+    }
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+
+        bfs(root)  ;
         return ans ;
         
     }

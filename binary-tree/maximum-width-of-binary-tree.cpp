@@ -16,18 +16,18 @@ public:
     void solve(TreeNode* root){
         if(root == NULL) return ; 
 
-        queue<pair<TreeNode* , long long >>q ; 
+        queue<pair<TreeNode* , unsigned long long >>q ; 
         q.push({root , 0}) ; 
         while(!q.empty()){
             int size = q.size() ; 
 
-            int st = q.front().second ; 
-            int end = q.back().second ; 
+            unsigned long long st = q.front().second ; 
+            unsigned long long end = q.back().second ; 
             
             mx = max(mx , (int)(end-st+1)) ; 
             for(int i = 0 ; i<size ; i++){
                 TreeNode* curr = q.front().first ; 
-                int pos = q.front().second ; 
+                unsigned long long  pos = q.front().second ; 
                 q.pop() ; 
 
 

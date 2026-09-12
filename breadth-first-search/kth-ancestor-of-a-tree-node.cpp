@@ -1,23 +1,24 @@
 class TreeAncestor {
 public:
-    vector<vector<int>>an ; 
+    vector<vector<int>>an ;
     int row ;
-    int col ;
+    int col ;   
     TreeAncestor(int n, vector<int>& parent) {
+
         row = n ; 
         col = log2(n)+1 ; 
-        an.resize(n , vector<int>(col , -1)) ; 
+        an.resize(row , vector<int>(col , -1))  ;
 
-        for(int i = 0 ; i<n ; i++){
+        for(int i = 0 ; i<n  ; i++){
             an[i][0] = parent[i] ; 
         }
 
-        for(int i = 1 ; i<col ; i++){
+        for(int j = 1 ; j<col ; j++){
 
-            for(int j = 0 ; j<n ; j++){
-
-                if(an[j][i-1] != -1){
-                    an[j][i] = an[an[j][i-1]][i-1] ; 
+            for(int i = 0 ; i<row ; i++){
+                
+                if(an[i][j-1] != -1) {
+                an[i][j] = an[an[i][j-1]][j-1] ; 
                 }
             }
         }
@@ -26,17 +27,14 @@ public:
     
     int getKthAncestor(int node, int k) {
 
-    for(int i = 0 ; i<col ; i++){
+        for(int i = 0 ; i<col ; i++){
 
-        if(k & (1 << i)){
-            node = an[node][i] ; 
-
-            if(node == -1) return -1 ;
+            if(k & (1 << i)){
+                node = an[node][i] ; 
+                if(node == -1) return -1 ;
+            }
         }
-        
-    }
-    return node ;
-        
+        return node ;
         
     }
 };

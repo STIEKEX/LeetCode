@@ -10,9 +10,15 @@ public:
 
 
                 if(img2[i][j] == 1)cnt2++ ; 
+                if(img1[i][j] == 1)cnt1++ ; 
             }
         }
+
+       
+        if(cnt1 == 0 || cnt2 == 0) return 0 ; 
+
+        if(cnt1 < cnt2) return cnt1 ; 
         return cnt2 ; 
-        
+
     }
 };

@@ -5,15 +5,15 @@ public:
         
         int n = arr.size() ; 
 
-        int sum  = 0  ;
+        long long  sum  = 0  ;
         for(int val  : arr){
             sum += val ; 
         }
         
 
        
-        int mx = 0 ;
-        int curr = 0 ;  
+        long long  mx = 0 ;
+        long long  curr = 0 ;  
         for(int val : arr){
             curr += val ; 
             mx = max(mx , curr) ; 
@@ -23,26 +23,26 @@ public:
         }
         if(k == 1) return mx%mod ; 
 
-        int suffix = 0 ; 
-        int mxSuffix = 0 ;
+        long long  suffix = 0 ; 
+        long long  mxSuffix = 0 ;
         for(int i = n-1 ; i>= 0 ; i--){
             suffix += arr[i] ; 
             mxSuffix = max(suffix , mxSuffix) ; 
         }
 
-        int prefix = 0 ; 
-        int mxPrefix = 0 ; 
+        long long prefix = 0 ; 
+        long long  mxPrefix = 0 ; 
         for(int i =0 ; i<n ; i++){
             prefix += arr[i] ; 
 
             mxPrefix = max(prefix , mxPrefix) ; 
         }
-        int ans = 0 ; 
+        long long  ans = 0 ; 
         if(sum > 0){
-         ans = mxSuffix + (k-2)*sum + mxPrefix ; 
+         ans = mxSuffix + (k-2LL)*sum + mxPrefix ; 
         }
         else{
-            ans  = mxSuffix + mxPrefix ;
+            ans  = max(mx , mxSuffix + mxPrefix) ;
         } 
         return ans % mod ; 
 

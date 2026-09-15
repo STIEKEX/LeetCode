@@ -2,14 +2,14 @@ class Solution {
 public:
     vector<int>dp  ;
 
-    bool check(string s, int i , int j ){
+    bool check(string& s, int i , int j ){
         while(i < j ){
             if(s[i] != s[j]) return false ;
             i++ , j-- ; 
         }
         return true ;
     }
-    int solve(int i , string s , int k){
+    int solve(int i , string& s , int k){
         int n =s.size() ; 
         if(i >= n) return 0 ; 
 

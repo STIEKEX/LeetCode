@@ -28,8 +28,8 @@ public:
                 len = j - i+1 ; 
 
 
-                if(j > 0 && best[j-1] != INT_MAX){
-                    ans = min(ans , len + best[j-1]) ; 
+                if(j > 0 && best[i-1] != INT_MAX){
+                    ans = min(ans , len + best[i-1]) ; 
                 }
 
                 best[j] = min(best[j] , len) ; 

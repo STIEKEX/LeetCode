@@ -11,28 +11,24 @@
 class Solution {
 public:
     TreeNode* solve(TreeNode* root , TreeNode* p , TreeNode* q){
-        
         if(root == NULL) return NULL ; 
 
-        if(root == p || root == q) return root ; 
-
-        TreeNode* l = solve(root->left , p , q) ; 
-        TreeNode* r = solve(root->right , p , q) ;
-
-        if(l == NULL && r == NULL) return NULL ; 
-
-        else if(l != NULL && r == NULL) return l ; 
-        else if(l == NULL && r != NULL ) return r ; 
-
-        return root ; 
-
+        if(root->val > p->val && root->val > q->val){
+            return solve(root->left , p  ,q) ;
+        }
+        else if(root->val < p->val && root->val < q->val){
+            return solve(root->right , p , q) ; 
+        }
+        else{
+            return root ;
+        }
+        return NULL ; 
     }
-
 
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-
         return solve(root , p , q) ; 
+        
         
     }
 };
